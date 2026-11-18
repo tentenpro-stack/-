@@ -28,7 +28,8 @@
 function initAudio(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!audio)audio=new AC();if(audio.state==='suspended')audio.resume()}
 function beep(f,d=.11,w='sine',v=.18){if(!soundOn||!audio)return;const o=audio.createOscillator(),g=audio.createGain(),n=audio.currentTime;o.type=w;o.frequency.setValueAtTime(f,n);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(Math.max(.0001,v*volume),n+.012);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(audio.destination);o.start(n);o.stop(n+d+.02)}
 function happy(){beep(660);setTimeout(()=>beep(880,.12),65)}function wrong(){beep(190,.2,'triangle',.22)}
-function speedSeconds(){return Math.max(.3,1-Math.floor(elapsed/10)*.2)}\nfunction update(){$('speed').textContent=speedSeconds().toFixed(1)+'秒';$('score').textContent=score.toLocaleString();$('combo').textContent=combo;$('time').textContent=time;$('timebar').style.width=(time/45*100)+'%';$('best').textContent=best.toLocaleString();$('feedback').textContent='ハート '+'♥ '.repeat(hearts)+'♡ '.repeat(3-hearts)}
+function speedSeconds(){return Math.max(.3,1-Math.floor(elapsed/10)*.2)}
+function update(){$('speed').textContent=speedSeconds().toFixed(1)+'秒';$('score').textContent=score.toLocaleString();$('combo').textContent=combo;$('time').textContent=time;$('timebar').style.width=(time/45*100)+'%';$('best').textContent=best.toLocaleString();$('feedback').textContent='ハート '+'♥ '.repeat(hearts)+'♡ '.repeat(3-hearts)}
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),480)}
 function comboEffect(c){
  if(c<3)return;
